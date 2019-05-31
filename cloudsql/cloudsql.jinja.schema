@@ -1,0 +1,97 @@
+info:
+  title: CloudSQL
+  author: osm.hammami@gmail.com
+  description: |
+    Creates a CloudSQL deployment
+  version: 0.2
+
+properties:
+  failover:
+    type: boolean
+    description: enable failover replica
+    default: true
+
+  cloudsql:
+    type: object
+    default:
+      properties: 
+    properties:
+      databaseVersion:
+        type: string
+        description: MYSQL_5_7 or MYSQL_5_6
+        default: MYSQL_5_7
+      dataDiskSizeGb:
+        type: integer
+        minimum: 10
+        maximum: 10000
+        default: 20
+      dataDiskType:
+        type: string
+        decription: PD_SSD or PD_HDD
+        default: PD_SSD
+      backupStartTime:
+        type: string
+        description: HH:MM in 24 hour format
+        default: 00:00
+      privateNetwork:
+        type: string
+        description: The ressource link for the VPC network from which the Cloud SQL instance is accessible for private IP.
+        default: default
+      tier:
+        type: string
+        description: https://cloud.google.com/sql/pricing#2nd-gen-pricing
+        default: db-n1-standard-2
+      region:
+        type: string
+        description: i.e. europe-west3
+        default: europe-west3
+      zone:
+        type: string
+        description: i.e. europe-west3-a
+        default: europe-west3-a
+      authorizedNetworks:
+        type: array
+        description: An array of allowed CIDR blocks
+
+  databaseFlags: 
+    type: array
+    description: An array of https://cloud.google.com/sql/docs/mysql/flags
+    items:
+      type: object
+      required:
+        - name
+        - value 
+      properties:
+        name: 
+          type: string 
+        value:
+          type: 
+            - integer
+            - string
+
+  dbUser:
+    type: object
+    required:
+      - password
+    properties:
+      name:
+        type: string
+        default: root
+      host:
+        type: string
+        default: '%'
+      password:
+        type: string
+  
+  database: 
+    type: object
+    required:
+      - name
+    properties:
+      name: 
+        type: string
+      charset:
+        type: string
+        description: https://dev.mysql.com/doc/refman/5.7/en/charset.html
+        default: utf8
+

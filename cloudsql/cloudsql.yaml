@@ -1,0 +1,50 @@
+#
+#  title: CloudSQL
+#  author: osm.hammami@gmail.com
+#  description: |
+#    Creates a CloudSQL deployment
+#  version: 0.2
+
+imports:
+  - path: cloudsql.jinja
+
+resources:
+  - name: test-deployment
+    type: cloudsql.jinja
+    properties:
+      cloudsql:
+        databaseVersion: MYSQL_5_7
+        region: europe-west3
+        tier: db-f1-micro
+        dataDiskSizeGb: 10
+        dataDiskType: PD_SSD
+        zone: europe-west3-a
+        backupStartTime: 09:00
+        privateNetwork: default
+        authorizedNetworks:
+        - name: home-network
+          value: 192.168.1.1/32
+      sqlimport:
+        bucket: bucket-repository
+        file: sql-dump.sql
+      failover: false
+      databases:
+      - name: db1
+        charset: utf8
+      - name: db2
+        charset: utf8
+      dbusers:
+      - user: root
+        host: '%'
+        password: mySuperSafePassword
+      - user: user1
+        host: '%'
+        password: mySuperSafePassword
+      - user: user2
+        host: '%'
+        password: mySuperSafePassword
+      databaseFlags:
+      - name: log_bin_trust_function_creators
+        value: 'On'
+      - name: default_time_zone
+        value: '+00:00'
