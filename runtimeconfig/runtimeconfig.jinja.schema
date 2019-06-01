@@ -1,0 +1,23 @@
+info:
+  title: Runtime Config
+  author: osm.hammami@gmail.com
+  description: |
+    Creates a RuntimeConfig resource.
+  version: 0.1
+
+properties:
+  variables:
+    type: array
+    description: An array of https://cloud.google.com/deployment-manager/runtime-configurator/reference/rest/v1beta1/projects.configs.variables
+    items:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+        value:
+          type:
+            - integer
+            - string

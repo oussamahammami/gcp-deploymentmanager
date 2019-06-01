@@ -1,0 +1,20 @@
+#  title: Runtime Config
+#  author: osm.hammami@gmail.com
+#  description: |
+#    Creates a RuntimeConfig resource.
+#  version: 0.1
+
+imports:
+  - path: runtimeconfig.jinja
+
+resources:
+  - name: test-deployment-1
+    type: runtimeconfig.jinja
+    properties:
+      variables:
+      - name: var1
+        value: 192.168.1.1
+      - name: var2
+        value: 192.168.1.2
+      - name: var3
+        value: 192.168.1.3

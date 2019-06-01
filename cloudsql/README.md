@@ -3,7 +3,7 @@
 ## Overview
 
 This is a [Google Cloud Deployment Manager](https://cloud.google.com/deployment-manager/overview) template that
-deploys a Cloud SQL Master instance and create a list of databases and users. I also use a DM `action` to
+deploys a Cloud SQL Master instance and creates a list of databases and users. I use a DM `action` to
 import structure to the instance from Google Storage bucket.
 
 ![Google DM Screenshot](./img/cloudsql.png)
@@ -12,7 +12,7 @@ import structure to the instance from Google Storage bucket.
 
 ## Prerequsites
 
-You need to have write permission to sqlimport bucket, the template will take care of adding the READER permission to the sql file in your bucket.
+You need to have write permission to `sqlimport` bucket, the template will take care of adding the `READER` permission to the sql file in your bucket.
 
 You need to grant 
 
@@ -100,3 +100,8 @@ test-04-cloudsql-import-structure                                            gcp
 test-04-cloudsql-master                                                      sqladmin.v1beta4.instance                                 COMPLETED  []
 ```
 
+### References
+
+* [API reference Cloud SQL v1beta4](https://cloud.google.com/sql/docs/mysql/admin-api/v1beta4/)
+* [API explorer Cloud SQL v1beta4](https://developers.google.com/apis-explorer/#p/sqladmin/v1beta4/)
+* [CloudSQL Testing Framework](https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/examples/v2/cloudsql)
